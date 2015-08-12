@@ -44,7 +44,7 @@ README
 
 
 
- 你把这个替换到deriv里的pow
+[Done] 你把这个替换到deriv里的pow
 
 else if !ifArray(expr[1]) && !ifArray(expr[2])这一句再找找bug
 
@@ -68,8 +68,10 @@ else if !ifArray(expr[1]) && !ifArray(expr[2])这一句再找找bug
 
             }
 
-
-
-把combine的pow部分的else
+[Done]把combine的pow部分的else
 
 改成这个试试
+==============================================
+我这些写的是啥已经完全忘了
+
+你记不记得我发给你过tan 微分的bug，因为忘记写了
