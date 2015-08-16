@@ -548,6 +548,17 @@ class Functions: NSObject {
                     expr = ["add",0,0]
                 }
                 break
+            case "tan":
+                if ifArray(expr[1]) {
+                    expr = ["product",derivAlgo(expr[1] as! [AnyObject], vari: vari),["pow",["sec",expr[1]],2]]
+                }
+                else if expr[1] is String && expr[1] as! String == vari {
+                    expr = ["pow",["sec",vari],2]
+                }
+                else {
+                    expr = ["add",0,0]
+                }
+                break
             case "exp":
                 if ifArray(expr[1]) {
                     expr = ["product", derivAlgo(expr[1] as! [AnyObject], vari: vari), expr[1]]
