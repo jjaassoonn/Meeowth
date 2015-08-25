@@ -697,20 +697,46 @@ class Functions: NSObject {
                     expr = ["product",["pow",expr[1],expr[2]],["add",["ln",expr[1]],["product",expr[2],derivAlgo(expr[1] as! [AnyObject], vari: vari)],["rev",expr[1]]]]
                 }
             }
-            else if !ifArray(expr[1]) && !ifArray(expr[2])这一句再找找bug
-                    else if power is Int {
-                        var temp = [AnyObject]()
-                        for i in 1...(power as! Int) {
-                            temp.append(base)
-                        }
-                        return combine(reduceRedundant(temp))
+            else if !ifArray(expr[1]) && !ifArray(expr[2]) {
+                if expr[1] is Double && expr[2] is String && expr[2] as! String == vari {
+                    return ["product",["pow",expr[1],expr[2]],["ln",expr[1]]]
+                }
+                else if expr[1] is Double && expr[2] is String && expr[2] as! String != vari {
+                    return ["add",0,0]
+                }
+                else if expr[1] is Double && expr[2] is Double {
+                    return ["add",0,0]
+                }
+                else if expr[1] is String && expr[1] as! String == vari {
+                    if expr[2] is Double {
+                        return ["product",expr[2],["pow", expr[1], expr[2] as! Double - 1]]
                     }
                     else {
-                        return this
+                        if expr[2] as! String == vari {
+                            return ["product",["pow",expr[1],expr[1]],["add",["ln",expr[1],1]]]
+                        }
+                        else {
+                            return ["product",expr[2],["pow",expr[1],["add",["neg",expr[2]],1]]]
+                        }
                     }
-        }
+                }
+                else {
+                    if expr[2] is Double {
+                        return ["add",0,0]
+                    }
+                    else {
+                        if expr[2] as! String == vari {
+                            return ["product",["pow",expr[1],expr[2]],["ln",expr[1]]]
+                        }
+                        else {
+                            return ["add",0,0]
+                        }
+                    }
+                }
+            }
         return expr
     }
+    
     func productDistributiveLaw (that: [AnyObject]) -> AnyObject {
         var expr = [AnyObject]()
         var lengthArray = [Int]()
